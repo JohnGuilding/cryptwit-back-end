@@ -6,7 +6,7 @@ contract Cryptwit {
     uint totalTweets;
     uint256 private seed;
 
-    event newTweet(address indexed from, uint256 timestamp, string message);
+    event NewTweet(address indexed from, uint256 timestamp, string message);
 
     struct Tweet {
         address tweeter;
@@ -16,20 +16,23 @@ contract Cryptwit {
 
     Tweet[] tweets;
 
-    constructor() payable {
-
-    } 
+    constructor() {
+    }
 
     function tweet(string memory _message) public {
-        // Add tweet to tweets array
-        // emit new tweet event
+        tweets.push(Tweet(msg.sender, _message, block.timestamp));
+        emit NewTweet(msg.sender, block.timestamp, _message);
+    }
+
+    function tip(address payable _to) public payable {
+        _to.transfer(msg.value);
     }
 
     function getTweets() public view returns (Tweet[] memory) {
         return tweets;
     }
 
-    function getTotalTweets() public view returns (uint256) {
+        function getTotalTweets() public view returns (uint256) {
         return totalTweets;
     }
 }
