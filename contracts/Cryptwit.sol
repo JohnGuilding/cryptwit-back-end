@@ -3,9 +3,6 @@
 pragma solidity ^0.8.0;
 
 contract Cryptwit {
-    uint totalTweets;
-    uint256 private seed;
-
     event NewTweet(address indexed from, uint256 timestamp, string message);
 
     struct Tweet {
@@ -16,8 +13,6 @@ contract Cryptwit {
 
     Tweet[] tweets;
 
-    constructor() {
-    }
 
     function tweet(string memory _message) public {
         tweets.push(Tweet(msg.sender, _message, block.timestamp));
@@ -30,9 +25,5 @@ contract Cryptwit {
 
     function getTweets() public view returns (Tweet[] memory) {
         return tweets;
-    }
-
-        function getTotalTweets() public view returns (uint256) {
-        return totalTweets;
     }
 }
