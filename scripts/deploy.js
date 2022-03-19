@@ -1,7 +1,9 @@
 const main = async () => {
     const cryptwitContractFactory = await hre.ethers.getContractFactory("Cryptwit");
     const cryptwitContract = await cryptwitContractFactory.deploy();
-    await cryptwitContract.deployed();
+    await cryptwitContract.deployed({
+        value: hre.ethers.utils.parseEther('0.001')
+    });
 
     console.log("Contract deployed to ", cryptwitContract.address);
 
